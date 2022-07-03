@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+
+    <Properties>
+        <Property name="BASE_FILE_NAME" value="lawempower"/>
+        <Property name="ERROR_BASE_FILE_NAME" value="${BASE_FILE_NAME}-error"/>
+        <Property name="LOG_DIR" value="${sys:catalina.base}/logs"/>
+        <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %c{1.} - %msg%n"/>
+        <Property name="FILE_NAME_PATTERN" value="${BASE_FILE_NAME}.%d{yyyy-MM-dd}.log"/>
+        <Property name="ERROR_FILE_NAME_PATTERN" value="${BASE_FILE_NAME}-error.%d{yyyy-MM-dd}.log"/>
+    </Properties>
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="FileAppender" fileName="${LOG_DIR}/${BASE_FILE_NAME}.log" filePattern="${LOG_DIR}/${FILE_NAME_PATTERN}">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorFileAppender" fileName="${LOG_DIR}/${ERROR_BASE_FILE_NAME}.log" filePattern="${LOG_DIR}/${ERROR_FILE_NAME_PATTERN}">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="hu.mklk.lawempower" level="debug" additivity="false">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+            <AppenderRef ref="FileAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

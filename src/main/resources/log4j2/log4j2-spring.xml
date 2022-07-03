@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+
+    <Properties>
+<!--        <Property name="LOG_DIR" value="/opt/logs/lawempower"/>-->
+        <Property name="LOG_DIR" value="${sys:catalina.base}/logs/"/>
+<!--        <Property name="LOG_DIR" value="${sys:catalina.base}/logs/juros"/>-->
+<!--        <Property name="LOG_DIR" value="C:\D\Programs\Tomcat9/logs"/>-->
+        <Property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %c{1.} - %msg%n"/>
+        <Property name="FILE_NAME_PATTERN" value="lawempower.%d{yyyy-MM-dd}.log"/>
+        <Property name="ERROR_FILE_NAME_PATTERN" value="lawempower-error.%d{yyyy-MM-dd}.log"/>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="FileAppender" fileName="${LOG_DIR}/lawempower.log" filePattern="${LOG_DIR}/${FILE_NAME_PATTERN}">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="ErrorFileAppender" fileName="${LOG_DIR}/lawempower-error.log"
+                     filePattern="${LOG_DIR}/${ERROR_FILE_NAME_PATTERN}">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="FileAppender"/>
+            <AppenderRef ref="ErrorFileAppender" level="error"/>
+        </Root>
+
+        <Logger name="hu.mklk.mklkwh" level="info" additivity="false">
+            <AppenderRef ref="FileAppender"/>
+        </Logger>
+    </Loggers>
+</Configuration>
