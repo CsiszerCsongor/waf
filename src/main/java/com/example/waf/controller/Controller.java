@@ -1,6 +1,7 @@
 package com.example.waf.controller;
 
 import com.example.waf.service.IncommingRequestService;
+import com.example.waf.service.IncommingRequestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
 @RestController
 public class Controller {
 
-    private IncommingRequestService incommingRequestService;
+    private IncommingRequestService incommingRequestServiceImpl;
 
     @Autowired
-    public Controller(IncommingRequestService incommingRequestService){
-        this.incommingRequestService = incommingRequestService;
+    public Controller(IncommingRequestServiceImpl incommingRequestServiceImpl){
+        this.incommingRequestServiceImpl = incommingRequestServiceImpl;
     }
 
     @GetMapping("/**")
@@ -31,13 +32,13 @@ public class Controller {
             HttpMethod method,
             HttpServletRequest request,
             HttpServletResponse response
-            ) throws URISyntaxException, UnsupportedEncodingException {
+            ) throws URISyntaxException, IOException {
 
-        return incommingRequestService.processIncommingRequest(body,
-                method,
-                request,
-                response,
-                UUID.randomUUID().toString());
+        return incommingRequestServiceImpl.processIncommingRequest(body,
+                                                                   method,
+                                                                   request,
+                                                                   response,
+                                                                   UUID.randomUUID().toString());
 
     }
 
@@ -47,13 +48,13 @@ public class Controller {
             HttpMethod method,
             HttpServletRequest request,
             HttpServletResponse response
-    ) throws URISyntaxException, UnsupportedEncodingException {
+    ) throws URISyntaxException, IOException {
 
-        return incommingRequestService.processIncommingRequest(body,
-                method,
-                request,
-                response,
-                UUID.randomUUID().toString());
+        return incommingRequestServiceImpl.processIncommingRequest(body,
+                                                                   method,
+                                                                   request,
+                                                                   response,
+                                                                   UUID.randomUUID().toString());
 
     }
 
