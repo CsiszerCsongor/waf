@@ -4,3 +4,4 @@ services:
     restart: always
     ports:
       - '7000:80'
+# default user:password   admin:password

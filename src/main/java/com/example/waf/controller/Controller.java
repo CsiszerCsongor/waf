@@ -19,11 +19,11 @@ import java.util.UUID;
 @RestController
 public class Controller {
 
-    private IncommingRequestService incommingRequestServiceImpl;
+    private IncommingRequestService incommingRequestService;
 
     @Autowired
-    public Controller(IncommingRequestServiceImpl incommingRequestServiceImpl){
-        this.incommingRequestServiceImpl = incommingRequestServiceImpl;
+    public Controller(IncommingRequestServiceImpl incommingRequestService){
+        this.incommingRequestService = incommingRequestService;
     }
 
     @GetMapping("/**")
@@ -34,11 +34,11 @@ public class Controller {
             HttpServletResponse response
             ) throws URISyntaxException, IOException {
 
-        return incommingRequestServiceImpl.processIncommingRequest(body,
-                                                                   method,
-                                                                   request,
-                                                                   response,
-                                                                   UUID.randomUUID().toString());
+        return incommingRequestService.processIncommingRequest(body,
+                                                               method,
+                                                               request,
+                                                               response,
+                                                               UUID.randomUUID().toString());
 
     }
 
@@ -50,11 +50,11 @@ public class Controller {
             HttpServletResponse response
     ) throws URISyntaxException, IOException {
 
-        return incommingRequestServiceImpl.processIncommingRequest(body,
-                                                                   method,
-                                                                   request,
-                                                                   response,
-                                                                   UUID.randomUUID().toString());
+        return incommingRequestService.processIncommingRequest(body,
+                                                               method,
+                                                               request,
+                                                               response,
+                                                               UUID.randomUUID().toString());
 
     }
 
