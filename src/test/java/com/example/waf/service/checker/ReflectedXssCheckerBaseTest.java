@@ -1,11 +1,9 @@
 package com.example.waf.service.checker;
 
-import com.example.waf.exceptions.XssThreateningException;
-import com.example.waf.service.XssRegexLoader;
-
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
+import com.example.waf.service.DecoderService;
+import com.example.waf.service.XssRegexLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,7 +18,6 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,12 +29,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Deprecated
 @ExtendWith(MockitoExtension.class)
-class ReflectedXssCheckerTest {
+class ReflectedXssCheckerBaseTest {
 
     @Mock
-    private XssChecker xssChecker;
+    private XssCheckerBase xssChecker;
     @Mock
     private MockHttpServletRequest request;
+    @Mock
+    private XssRegexLoader xssRegexLoader;
 
     private ReflectedXssChecker reflectedXssChecker;
 
@@ -45,7 +44,7 @@ class ReflectedXssCheckerTest {
 
     @BeforeEach
     private void init(){
-        reflectedXssChecker = new ReflectedXssChecker(xssChecker);
+        reflectedXssChecker = new ReflectedXssChecker(xssRegexLoader);
 
         request = new MockHttpServletRequest();
     }
@@ -55,7 +54,7 @@ class ReflectedXssCheckerTest {
     void notThrowExceptionWhenThereAreNoParameters() {
         request.setParameters(new HashMap<String, String>());
 
-        assertDoesNotThrow(() -> reflectedXssChecker.checkParametersAgainstXss(request));
+        assertDoesNotThrow(() -> reflectedXssChecker.checkRequest(request));
     }
 
     @Nested
