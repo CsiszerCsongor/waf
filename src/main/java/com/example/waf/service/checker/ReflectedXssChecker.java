@@ -1,13 +1,12 @@
 package com.example.waf.service.checker;
 
 import com.example.waf.exceptions.XssThreateningException;
-import com.example.waf.service.DecoderService;
 import com.example.waf.service.XssRegexLoader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 @Slf4j

@@ -4,7 +4,7 @@ import com.example.waf.exceptions.XssThreateningException;
 import com.example.waf.service.XssRegexLoader;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class DOMBasedXssChecker extends XssCheckerBase {
