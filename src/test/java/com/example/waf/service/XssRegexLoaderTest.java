@@ -32,7 +32,7 @@ class XssRegexLoaderTest {
     private final LinkedList<String> regexWhitelistedHtmlTagAttributesStringList = new LinkedList<>();
 
     @BeforeEach
-    private void init(){
+    void init(){
         xssRegexLoader = new XssRegexLoader(
                 regexAgainstXssSourcePath,
                 regexBlacklistedHtmlTagListSourcePath,

@@ -1,12 +1,11 @@
 package com.example.waf.writer;
 
 import com.example.waf.exceptions.XssThreateningException;
+import jakarta.servlet.http.Cookie;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
